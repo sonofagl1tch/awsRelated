@@ -1,0 +1,62 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowUsersToCreateDeleteTheirOwnVirtualMFADevices",
+      "Effect": "Allow",
+      "Action": ["iam:*VirtualMFADevice"],
+      "Resource": ["arn:aws:iam::<account-ID>:mfa/${aws:username}"]
+    },
+    {
+      "Sid": "AllowUsersToEnableSyncDisableTheirOwnMFADevices",
+      "Effect": "Allow",
+      "Action": [
+        "iam:EnableMFADevice",
+        "iam:ListMFADevices",
+        "iam:ResyncMFADevice"
+      ],
+      "Resource": ["arn:aws:iam::<account-ID>:user/${aws:username}"]
+    },
+    {
+      "Sid": "AllowUsersToListVirtualMFADevices",
+      "Effect": "Allow",
+      "Action": ["iam:ListVirtualMFADevices"],
+      "Resource": ["arn:aws:iam::<account-ID>:mfa/*"]
+    },
+    {
+      "Sid": "AllowUsersToListUsersInConsole",
+      "Effect": "Allow",
+      "Action": ["iam:ListUsers"],
+      "Resource": ["arn:aws:iam::<account-ID>:user/*"]
+    },
+	{
+      "Sid": "AllowUsersAllActionsForCredentials",
+      "Effect": "Allow",
+      "Action": [
+        "iam:*LoginProfile",
+        "iam:*AccessKey*",
+        "iam:*SigningCertificate*"
+      ],
+      "Resource": ["arn:aws:iam::<account-ID>:user/${aws:username}"]
+    },
+{
+      "Effect": "Allow",
+      "Action": ["iam:ChangePassword"],
+      "Resource": ["arn:aws:iam::<account-ID>:user/${aws:username}"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["iam:GetAccountPasswordPolicy"],
+      "Resource": ["*"]
+    },
+	{
+      "Sid": "AllowUsersToSeeStatsOnIAMConsoleDashboard",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetAccount*",
+        "iam:ListAccount*"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
